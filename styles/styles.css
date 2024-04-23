@@ -5,9 +5,12 @@ body {
 }
 
 .page-header {
-  margin-block-end: 15px;
   background-color: rgb(100, 168, 168);
   border: 2px solid hsl(120, 75%, 22%);
+  padding: 2em;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
 }
 
 .date,
@@ -23,11 +26,26 @@ body {
   font-size: 3rem;
 }
 
+.cat-pod, .jokes-pod {
+  text-align: start;
+  height: 700px;
+}
+
+.pod {
+  border: 2px solid hsl(120, 75%, 22%);
+  border-radius: 5px;
+  padding: 15px;
+  background-color: rgb(100, 168, 168);
+}
+
 @media (min-width: 800px) {
   .main-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
+    place-items: center;
+    margin: 5em;
+    justify-items: stretch;
   }
   .full-width {
     grid-column-start: 1;
@@ -36,10 +54,17 @@ body {
 }
 
 @media (max-width: 799px) {
+
+  .page-header {
+    width: 100vw;
+  }
   .main-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 8px;
+    grid-column-start: 1;
+    grid-column-end: -1;
+    justify-content: center;
   }
   .date {
     font-size: 3rem;
@@ -49,10 +74,5 @@ body {
   }
 }
 
-.pod {
-  border: 2px solid hsl(120, 75%, 22%);
-  border-radius: 5px;
-  padding: 15px;
-  background-color: rgb(100, 168, 168);
-}
+
 

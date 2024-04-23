@@ -75,7 +75,8 @@ const newsAPIKey = `6de65409-e9fd-41f0-8271-0817ae1a356e`;
 const newsRegion = `uk`;
 const newsOrder = `newest`;
 const newsPage = '1';
-const newsAPIEndpoint = `https://content.guardianapis.com/search?q=${newsRegion}&api-key=${newsAPIKey}&order-by=${newsOrder}&pages=${newsPage}`;
+const newsThumbnail = 'thumbnail';
+const newsAPIEndpoint = `https://content.guardianapis.com/search?q=${newsRegion}&api-key=${newsAPIKey}&order-by=${newsOrder}&pages=${newsPage}&show-fields=${newsThumbnail}`;
 
 
 async function latestNews(area = newsDisplay, renderNews = () => {}) {
@@ -96,10 +97,10 @@ async function latestNews(area = newsDisplay, renderNews = () => {}) {
 function renderNews(finalNewsData = {}, area = newsDisplay) {
   // const {response} = newsData;
   const newsList = document.createElement("div");
-  newsList.innerHTML = `<h2>Latest News</h2>`;
+  newsList.innerHTML = `<h2 style="padding: 0.5em">Latest News</h2>`;
   let i = 9;
   while (i >= 0) {
-    newsList.innerHTML += `<li>${finalNewsData[i].webTitle}</li>`;
+    newsList.innerHTML += `<li style="margin: 3em; list-style-type: none; display: flex; justify-content: center; flex-direction: column; align-items: center;"><img src='${finalNewsData[i].fields.thumbnail}' style="max-width:600px; height:auto; min-width: 400px;"/><div style="font-size: large; font-weight: bold;">${finalNewsData[i].webTitle}</div></li>`;
     i -= 1;
     
 }
@@ -129,7 +130,7 @@ async function catFacts(area = catsFactDisplay, renderCats = () => {}) {
 
 function renderCats(data = {}, area = catsFactDisplay) {
   const factList = document.createElement("div");
-  factList.innerHTML = `<h2>3 random cat facts</h2><ol><li>${data[0]}</li><li>${data[1]}</li><li>${data[2]}</li></ol>`;
+  factList.innerHTML = `<h2 style="text-align: center; padding: 0.5em">3 Random Cat Facts</h2><ol><li style="margin: 1em">${data[0]}</li><li style="margin: 1em">${data[1]}</li><li style="margin: 1em">${data[2]}</li></ol>`;
   area.replaceChildren(factList);
 }
 
@@ -159,7 +160,7 @@ try {
 function renderJokes(jokesData = {}, area = jokesDisplay) {
  
   const characterList = document.createElement("div");
-  characterList.innerHTML = `<h2>Jokes of the day</h2>`;
+  characterList.innerHTML = `<h2 style="text-align: center; padding: 0.5em">Jokes of the Day</h2>`;
 
   let indexes = new Set();
 
@@ -169,7 +170,7 @@ function renderJokes(jokesData = {}, area = jokesDisplay) {
   }
 
   for (const index of indexes) {
-     characterList.innerHTML += `<li>QUESTION: ${jokesData[index].setup} ANSWER: ${jokesData[index].punchline}</li>`; // <-- note the +=
+     characterList.innerHTML += `<li style="margin: 1em">QUESTION: ${jokesData[index].setup} ANSWER: ${jokesData[index].punchline}</li>`; // <-- note the +=
   }
 
   area.replaceChildren(characterList);
